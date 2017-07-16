@@ -113,6 +113,7 @@ export default class DropdownAlert extends Component {
       startDelta: props.startDelta,
       endDelta: props.endDelta,
       topValue: 0,
+      payload: {},
     }
     // Render
     this.renderButton = this.renderButton.bind(this)
@@ -149,7 +150,7 @@ export default class DropdownAlert extends Component {
     }
     this.alertWithType('custom', title, message)
   }
-  alertWithType(type, title, message) {
+  alertWithType(type, title, message, payload) {
     if (this.validateType(type) == false) {
       return
     }
@@ -167,7 +168,8 @@ export default class DropdownAlert extends Component {
         message: message,
         title: title,
         isOpen: true,
-        topValue: 0
+        topValue: 0,
+        payload,
       })
       if (this.state.isOpen == false) {
         this.animate(1)
@@ -194,7 +196,8 @@ export default class DropdownAlert extends Component {
             message: message,
             title: title,
             isOpen: true,
-            topValue: 0
+            topValue: 0,
+            payload,
           })
         }
         self.animate(1)
@@ -229,7 +232,8 @@ export default class DropdownAlert extends Component {
               type: this.state.type,
               title: this.state.title,
               message: this.state.message,
-              action: action // !!! How the alert was dismissed: automatic, programmatic, tap, pan or cancel
+              payload: this.state.payload,
+              action: action, // !!! How the alert was dismissed: automatic, programmatic, tap, pan or cancel
             }
             onDismiss(data)
           }
